@@ -12,6 +12,7 @@ pub struct CompletionCandidate {
     tag: Option<StyledStr>,
     display_order: Option<usize>,
     hidden: bool,
+    global: bool,
 }
 
 impl CompletionCandidate {
@@ -43,6 +44,14 @@ impl CompletionCandidate {
     /// Future: these may become user-visible
     pub fn tag(mut self, tag: Option<StyledStr>) -> Self {
         self.tag = tag;
+        self
+    }
+
+    /// Group candidates based on if they are global
+    ///
+    /// Future: these may become user-visible
+    pub fn global(mut self, global: bool) -> Self {
+        self.global = global;
         self
     }
 
@@ -93,6 +102,11 @@ impl CompletionCandidate {
     /// Get the grouping tag
     pub fn get_tag(&self) -> Option<&StyledStr> {
         self.tag.as_ref()
+    }
+
+    /// Get if this is a global argument
+    pub fn is_global(&self) -> bool {
+        self.global
     }
 
     /// Get the grouping tag

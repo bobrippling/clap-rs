@@ -535,6 +535,7 @@ fn populate_arg_candidate(candidate: CompletionCandidate, arg: &clap::Arg) -> Co
                 .into(),
         ))
         .display_order(Some(arg.get_display_order()))
+        .global(arg.is_global_set())
         .hide(arg.is_hide_set())
 }
 
