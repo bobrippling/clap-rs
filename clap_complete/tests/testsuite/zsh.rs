@@ -470,11 +470,12 @@ fn complete_dynamic_tagged_options() {
 % zstyle ':completion:*' group-name ''
 % zstyle ':completion:*:descriptions' format '%d'
 % dynamic -
+completing "global" options
+-v  -- --verbose
 completing "Options" options
 -F  -- --format
 -h  -- Print help
 -i  -- --input
--v  -- --verbose
 "#]];
     let actual = runtime.complete(&input, &term).unwrap();
     assert_data_eq!(actual, expected);

@@ -447,14 +447,15 @@ compdef _clap_dynamic_completer_NAME BIN"#
                 write!(buf, "{}", ifs.as_deref().unwrap_or("\n"))?;
             }
             let mut tmp_tag = StyledStr::default();
-            let tag = candidate.get_tag().unwrap_or_else(|| {
-                if candidate.is_global() {
-                    tmp_tag = StyledStr::from("global");
-                } else {
-                    tmp_tag = StyledStr::default();
-                }
+            let tag = if candidate.is_global() {
+                tmp_tag = StyledStr::from("global");
                 &tmp_tag
-            });
+            } else {
+                candidate.get_tag().unwrap_or_else(|| {
+                    tmp_tag = StyledStr::default();
+                    &tmp_tag
+                })
+            };
 
             write!(buf, "{}:", tag)?;
 
